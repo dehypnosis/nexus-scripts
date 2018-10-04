@@ -1,0 +1,26 @@
+plugins {
+    id 'groovy'
+}
+
+group 'nexus-script'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext.versions = [
+        nxrm3: '3.9.0-01'
+]
+
+dependencies {
+    compile group: 'org.sonatype.nexus', name: 'nexus-core', version: versions.nxrm3
+    compile group: 'org.sonatype.nexus', name: 'nexus-script', version: versions.nxrm3ls
+    compile group: 'org.sonatype.nexus', name: 'nexus-security', version: versions.nxrm3
+    compile group: 'org.sonatype.nexus', name: 'nexus-repository', version: versions.nxrm3
+    compile group: 'org.sonatype.nexus.plugins', name: 'nexus-repository-maven', version: versions.nxrm3
+    compile group: 'org.sonatype.nexus.plugins', name: 'nexus-script-plugin', version: versions.nxrm3
+
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
