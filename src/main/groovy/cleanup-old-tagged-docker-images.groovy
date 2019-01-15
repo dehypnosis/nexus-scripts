@@ -31,10 +31,11 @@ repository.repositoryManager.browse().each { Repository repo ->
         }
         componentsPerName.each { name, components ->
             // find old ones except latest 5 components
-            def index = Math.max(0, components.size() - removeCriterion)
-            def oldComponents = components[0..<(index)] as Component[]
+            def oldComponents = components as Component[]
+            oldComponents = oldComponents.sort{it.lastUpdated()}
+            oldComponents = oldComponents[0..<(Math.max(0, components.size() - removeCriterion))]
             oldComponents.each { component ->
-                log.info("Remove old component: " + component.name() + ":" + component.version())
+                log.info("Remove old component: " + component.name() + ":" + component.version() + " updated at " + component.lastUpdated())
                 tx.deleteComponent(component)
             }
         }
